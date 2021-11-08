@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './App.css';
+import 'App.css';
 import { FullPageSpinner } from 'components/lib';
 // TODO: import {useAuth} from './context/auth-context'
 
