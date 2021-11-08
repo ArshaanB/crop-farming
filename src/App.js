@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
 
+import './App.css';
+import { FullPageSpinner } from 'components/lib';
+// TODO: import {useAuth} from './context/auth-context'
+
+const AuthenticatedApp = React.lazy(() =>
+  import(/* webpackPrefetch: true */ 'authenticated-app')
+);
+const UnauthenticatedApp = React.lazy(() => import('unauthenticated-app'));
 function App() {
+  // TODO: const { user } = useAuth();
+  const user = null;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Suspense fallback={<FullPageSpinner />}>
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </React.Suspense>
   );
 }
 
