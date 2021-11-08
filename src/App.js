@@ -1,15 +1,13 @@
 import * as React from 'react';
 
-import 'App.css';
+// import { useAuth } from './context/auth-context';
 import { FullPageSpinner } from 'components/lib';
-// TODO: import {useAuth} from './context/auth-context'
 
-const AuthenticatedApp = React.lazy(() =>
-  import(/* webpackPrefetch: true */ 'authenticated-app')
-);
+const AuthenticatedApp = React.lazy(() => import(/* webpackPrefetch: true */ 'authenticated-app'));
 const UnauthenticatedApp = React.lazy(() => import('unauthenticated-app'));
+
 function App() {
-  // TODO: const { user } = useAuth();
+  // const { user } = useAuth();
   const user = null;
   return (
     <React.Suspense fallback={<FullPageSpinner />}>
@@ -18,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };

@@ -1,13 +1,16 @@
+import './bootstrap';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { App } from 'App';
+import reportWebVitals from 'reportWebVitals';
+// import { AppProviders } from 'context/index';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <AppProviders>
+  //   <App />
+  // </AppProviders>
+  <App />
+  ,
   document.getElementById('root')
 );
 
