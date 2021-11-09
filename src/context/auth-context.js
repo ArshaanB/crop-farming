@@ -46,13 +46,13 @@ function AuthProvider(props) {
     (form) => auth.login(form).then((user) => setData(user)),
     [setData]
   );
-  // Is better named registerAndLogin.
+  // Is better named registerAndLogin (but it only logs in on successful
+  //  register).
   const register = React.useCallback(
     (form) => {
       return auth.register(form).then(() => {
-        auth.login(form).then((res) => console.log(res))
-      })
-      // .then((user) => setData(user))
+        auth.login(form).then((user) => setData(user));
+      });
     },
     [setData]
   );

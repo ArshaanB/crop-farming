@@ -4,6 +4,7 @@ import GoTrue from 'gotrue-js';
 // you shouldn't have to implement something like this in your own app
 
 // Instantiate the GoTrue auth client with an optional configuration
+// TODO: Replace below URL with const authURL = process.env.REACT_APP_AUTH_URL;
 const gotruejsauth = new GoTrue({
   APIUrl: 'https://cropfarming.org/.netlify/identity',
   audience: '',
@@ -19,25 +20,24 @@ async function getToken() {
   return window.localStorage.getItem(localStorageKey);
 }
 
-function handleUserResponse({ user }) {
-  window.localStorage.setItem(localStorageKey, user.token);
-  return user;
+function handleUserResponse({ token: userTokenDetails}) {
+  window.localStorage.setItem(localStorageKey, userTokenDetails);
+  return userTokenDetails;
 }
 
 function login({ email, password }) {
-  return gotruejsauth.login(email, password);
-  // .then(handleUserResponse)
+  return gotruejsauth.login(email, password).then(handleUserResponse);
 }
 
 function register({ email, password }) {
-  return gotruejsauth.signup(email, password).then(res => console.log(res));
-  // return client('register', {email, password}).then(handleUserResponse)
+  return gotruejsauth.signup(email, password);
 }
 
 async function logout() {
   window.localStorage.removeItem(localStorageKey);
 }
 
+/*
 // an auth provider wouldn't use your client, they'd have their own
 // so that's why we're not just re-using the client
 const authURL = process.env.REACT_APP_AUTH_URL;
@@ -58,5 +58,6 @@ async function client(endpoint, data) {
     }
   });
 }
+*/
 
 export { getToken, login, register, logout, localStorageKey };
