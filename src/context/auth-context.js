@@ -13,13 +13,6 @@ async function bootstrapAppData() {
   let user = null;
 
   const token = await auth.getToken();
-  if (token) {
-    const data = await client('bootstrap', { token });
-    queryCache.setQueryData('list-items', data.listItems, {
-      staleTime: 5000,
-    });
-    user = data.user;
-  }
   return user;
 }
 

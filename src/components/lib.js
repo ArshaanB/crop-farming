@@ -46,11 +46,11 @@ Spinner.defaultProps = {
 
 const buttonVariants = {
   primary: {
-    background: colors.indigo,
+    background: colors.green,
     color: colors.base,
   },
   secondary: {
-    background: colors.gray,
+    background: colors.lightyellow,
     color: colors.text,
   },
 }

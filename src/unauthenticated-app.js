@@ -7,6 +7,7 @@ import { Modal, ModalContents, ModalOpenButton } from 'components/modal';
 // import {Logo} from 'components/logo'
 // import { useAuth } from 'context/auth-context';
 import { useAsync } from 'utils/hooks';
+import * as colors from './styles/colors'
 
 function LoginForm({ onSubmit, submitButton }) {
   const { isLoading, isError, error, run } = useAsync();
@@ -75,7 +76,9 @@ function UnauthenticatedApp() {
       }}
     >
       <img src='logo.png' width='80' height='80' alt='' />
-      <h1>Crop Farming</h1>
+      <h1 css={{
+        color: colors.green
+      }}>Crop Farming</h1>
       <div
         css={{
           display: 'grid',
