@@ -8,6 +8,7 @@ const UnauthenticatedApp = React.lazy(() => import('unauthenticated-app'));
 
 function App() {
   const { user } = useAuth();
+  
   return (
     <React.Suspense fallback={<FullPageSpinner />}>
       {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}

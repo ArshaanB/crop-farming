@@ -3,7 +3,6 @@ import { jsx } from '@emotion/core';
 
 import * as React from 'react';
 import { queryCache } from 'react-query';
-// TODO: Update below file.
 import * as auth from 'auth-provider';
 import { client } from 'utils/api-client';
 import { useAsync } from 'utils/hooks';
@@ -14,9 +13,8 @@ async function bootstrapAppData() {
 
   const token = await auth.getToken();
   if (token) {
-    // const data = await client('bootstrap', {token})
-    const data = { user: undefined };
-    user = data.user;
+    const data = await auth.recover();
+    user = data?.email;
   }
   return user;
 }
