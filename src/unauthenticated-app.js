@@ -4,20 +4,19 @@ import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { Input, Button, Spinner, FormGroup, ErrorMessage } from 'components/lib';
 import { Modal, ModalContents, ModalOpenButton } from 'components/modal';
-// import {Logo} from 'components/logo'
-// import { useAuth } from 'context/auth-context';
+import { useAuth } from 'context/auth-context';
 import { useAsync } from 'utils/hooks';
-import * as colors from './styles/colors'
+import * as colors from './styles/colors';
 
 function LoginForm({ onSubmit, submitButton }) {
   const { isLoading, isError, error, run } = useAsync();
   function handleSubmit(event) {
     event.preventDefault();
-    const { username, password } = event.target.elements;
+    const { email, password } = event.target.elements;
 
     run(
       onSubmit({
-        username: username.value,
+        email: email.value,
         password: password.value,
       })
     );
@@ -38,8 +37,8 @@ function LoginForm({ onSubmit, submitButton }) {
       }}
     >
       <FormGroup>
-        <label htmlFor='username'>Username</label>
-        <Input id='username' />
+        <label htmlFor='email'>Email</label>
+        <Input id='email' type='email' />
       </FormGroup>
       <FormGroup>
         <label htmlFor='password'>Password</label>
@@ -61,9 +60,7 @@ function LoginForm({ onSubmit, submitButton }) {
 }
 
 function UnauthenticatedApp() {
-  // const { login, register } = useAuth();
-  const login = () => {};
-  const register = () => {};
+  const { login, register } = useAuth();
   return (
     <div
       css={{
@@ -76,9 +73,13 @@ function UnauthenticatedApp() {
       }}
     >
       <img src='logo.png' width='80' height='80' alt='' />
-      <h1 css={{
-        color: colors.green
-      }}>Crop Farming</h1>
+      <h1
+        css={{
+          color: colors.green,
+        }}
+      >
+        Crop Farming
+      </h1>
       <div
         css={{
           display: 'grid',

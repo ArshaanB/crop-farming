@@ -15,8 +15,8 @@ async function bootstrapAppData() {
   const token = await auth.getToken();
   if (token) {
     // const data = await client('bootstrap', {token})
-    const data = {user: 'testuser'}
-    user = data.user
+    const data = { user: undefined };
+    user = data.user;
   }
   return user;
 }
@@ -46,8 +46,14 @@ function AuthProvider(props) {
     (form) => auth.login(form).then((user) => setData(user)),
     [setData]
   );
+  // Is better named registerAndLogin.
   const register = React.useCallback(
-    (form) => auth.register(form).then((user) => setData(user)),
+    (form) => {
+      return auth.register(form).then(() => {
+        auth.login(form).then((res) => console.log(res))
+      })
+      // .then((user) => setData(user))
+    },
     [setData]
   );
   const logout = React.useCallback(() => {
