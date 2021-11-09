@@ -20,9 +20,10 @@ async function getToken() {
   return window.localStorage.getItem(localStorageKey);
 }
 
-function handleUserResponse({ token: userTokenDetails}) {
-  window.localStorage.setItem(localStorageKey, userTokenDetails);
-  return userTokenDetails;
+function handleUserResponse(allDetails) {
+  const userToken = allDetails?.token?.access_token;
+  window.localStorage.setItem(localStorageKey, userToken);
+  return allDetails;
 }
 
 function login({ email, password }) {

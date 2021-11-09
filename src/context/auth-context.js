@@ -43,18 +43,16 @@ function AuthProvider(props) {
   }, [run]);
 
   const login = React.useCallback(
-    (form) => auth.login(form).then((user) => setData(user)),
+    (form) => auth.login(form).then((user) => setData(user.email)),
     [setData]
   );
   // Is better named registerAndLogin (but it only logs in on successful
   //  register).
   const register = React.useCallback(
     (form) => {
-      return auth.register(form).then(() => {
-        auth.login(form).then((user) => setData(user));
-      });
+      return auth.register(form).then(() => login(form));
     },
-    [setData]
+    [login]
   );
   const logout = React.useCallback(() => {
     auth.logout();
