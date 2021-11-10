@@ -1,0 +1,11 @@
+.logo:hover {
+    text-decoration: none;
+}
+
+.getting-started:hover {
+  color: #facc4f;
+}
+.about:hover {
+  color: #facc4f;
+  text-decoration: none;
+}

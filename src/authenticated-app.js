@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
-import { Routes } from 'react-router-dom';
+import 'authenticated-app.css';
+import { Routes, Route, Link as RouterLink } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Button, ErrorMessage, FullPageErrorFallback } from './components/lib';
 import * as mq from './styles/media-queries';
-// import * as colors from './styles/colors';
+import * as colors from './styles/colors';
 import { useAuth } from './context/auth-context';
+import { HomeScreen } from 'screens/home';
 
 function ErrorFallback({ error }) {
   return (
@@ -34,6 +36,57 @@ function AuthenticatedApp() {
           alignItems: 'center',
           position: 'absolute',
           top: '10px',
+          left: '10px',
+        }}
+      >
+        <RouterLink
+          to='/'
+          css={{
+            display: 'flex',
+          }}
+          className='logo'
+        >
+          <img src='logo.png' width='40' height='40' alt='' />
+          <div
+            css={{
+              color: colors.green,
+              fontWeight: 600,
+              fontSize: '24px',
+            }}
+          >
+            Crop Farming
+          </div>
+        </RouterLink>
+        <RouterLink to='/getting-started'>
+          <Button
+            css={{
+              marginLeft: '20px',
+              borderRadius: '7px',
+              fontSize: '18px',
+            }}
+            className='getting-started'
+          >
+            Getting Started
+          </Button>
+        </RouterLink>
+        <RouterLink
+          css={{
+            fontSize: '18px',
+            padding: '0px 10px',
+            color: colors.text,
+          }}
+          to='/about'
+          className='about'
+        >
+          About
+        </RouterLink>
+      </div>
+      <div
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          position: 'absolute',
+          top: '10px',
           right: '10px',
         }}
       >
@@ -42,17 +95,17 @@ function AuthenticatedApp() {
           Logout
         </Button>
       </div>
+      {/* Removed margin: '0 auto', from css below. */}
       <div
         css={{
-          margin: '0 auto',
           padding: '4em 2em',
           maxWidth: '840px',
           width: '100%',
           display: 'grid',
           gridGap: '1em',
-          gridTemplateColumns: '1fr 3fr',
+          gridTemplateColumns: 'none',
           [mq.small]: {
-            gridTemplateColumns: '1fr',
+            gridTemplateColumns: 'none',
             gridTemplateRows: 'auto',
             width: '100%',
           },
@@ -71,6 +124,7 @@ function AuthenticatedApp() {
 function AppRoutes() {
   return (
     <Routes>
+      <Route path='/' element={<HomeScreen />} />
       {/* <Route path='/list' element={<ReadingListScreen />} />
       <Route path='/finished' element={<FinishedScreen />} />
       <Route path='/discover' element={<DiscoverBooksScreen />} />
