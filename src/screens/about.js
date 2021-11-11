@@ -8,13 +8,27 @@ function AboutScreen() {
     <div>
       <p
         css={{
-          fontSize: '22px',
+          fontSize: '1.5em',
           marginTop: '25px',
         }}
       >
-        Crop Farming takes the process of "earning yield on your crypto-assets" and makes it
-        accessible to you, general public!
+        Hey, nice to meet you, I'm Arshaan. Here are links to some of my profiles so you can put a face to all these words.
       </p>
+      <ul
+        css={{
+          fontSize: '1.25em',
+        }}
+      >
+        <li>
+          <a href='https://www.linkedin.com/in/arshaan/'>Linkedin</a>
+        </li>
+        <li>
+          <a href='https://twitter.com/arshaan_b'>Twitter</a>
+        </li>
+        <li>
+          <a href='https://github.com/ArshaanB/'>Github</a>
+        </li>
+      </ul>
     </div>
   );
 }
