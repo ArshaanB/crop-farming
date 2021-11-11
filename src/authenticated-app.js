@@ -5,10 +5,11 @@ import 'authenticated-app.css';
 import { Routes, Route, Link as RouterLink } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Button, ErrorMessage, FullPageErrorFallback } from './components/lib';
-import * as mq from './styles/media-queries';
+// import * as mq from './styles/media-queries';
 import * as colors from './styles/colors';
 import { useAuth } from './context/auth-context';
 import { HomeScreen } from 'screens/home';
+import { AboutScreen } from 'screens/about';
 
 function ErrorFallback({ error }) {
   return (
@@ -29,89 +30,96 @@ function AuthenticatedApp() {
   const { user, logout } = useAuth();
 
   return (
-    <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
-      <div
-        css={{
-          display: 'flex',
-          alignItems: 'center',
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-        }}
-      >
-        <RouterLink
-          to='/'
+    <ErrorBoundary
+      FallbackComponent={FullPageErrorFallback}
+      css={{
+        display: 'flex',
+      }}
+    >
+      <div>
+        <div
           css={{
             display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
           }}
-          className='logo'
         >
-          <img src='logo.png' width='40' height='40' alt='' />
-          <div
+          <RouterLink
+            to='/'
             css={{
-              color: colors.green,
-              fontWeight: 600,
-              fontSize: '24px',
+              display: 'flex',
             }}
+            className='logo'
           >
-            Crop Farming
-          </div>
-        </RouterLink>
-        <RouterLink to='/getting-started'>
-          <Button
+            <img src='logo.png' width='40' height='40' alt='' />
+            <div
+              css={{
+                color: colors.green,
+                fontWeight: 600,
+                fontSize: '24px',
+              }}
+            >
+              Crop Farming
+            </div>
+          </RouterLink>
+          <RouterLink to='/getting-started'>
+            <Button
+              css={{
+                marginLeft: '20px',
+                borderRadius: '7px',
+                fontSize: '18px',
+              }}
+              className='getting-started'
+            >
+              Getting Started
+            </Button>
+          </RouterLink>
+          <RouterLink
             css={{
-              marginLeft: '20px',
-              borderRadius: '7px',
               fontSize: '18px',
+              padding: '0px 10px',
+              color: colors.text,
             }}
-            className='getting-started'
+            to='/about'
+            className='about'
           >
-            Getting Started
-          </Button>
-        </RouterLink>
-        <RouterLink
+            About
+          </RouterLink>
+        </div>
+        <div
           css={{
-            fontSize: '18px',
-            padding: '0px 10px',
-            color: colors.text,
+            display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
           }}
-          to='/about'
-          className='about'
         >
-          About
-        </RouterLink>
+          {user}
+          <Button variant='secondary' css={{ marginLeft: '10px' }} onClick={logout}>
+            Logout
+          </Button>
+        </div>
       </div>
-      <div
-        css={{
-          display: 'flex',
-          alignItems: 'center',
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-        }}
-      >
-        {user}
-        <Button variant='secondary' css={{ marginLeft: '10px' }} onClick={logout}>
-          Logout
-        </Button>
-      </div>
-      {/* Removed margin: '0 auto', from css below. */}
+      {/* Removed margin: '0 auto', from css below.
+        [mq.small]: {
+          width: '100%',
+        }, and many more styles.*/}
       <div
         css={{
           padding: '4em 2em',
-          maxWidth: '840px',
+          display: 'flex',
           width: '100%',
-          display: 'grid',
-          gridGap: '1em',
-          gridTemplateColumns: 'none',
-          [mq.small]: {
-            gridTemplateColumns: 'none',
-            gridTemplateRows: 'auto',
-            width: '100%',
-          },
+          justifyContent: 'center',
         }}
       >
-        <main css={{ width: '100%' }}>
+        <main
+          css={{
+            width: '80%',
+          }}
+        >
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <AppRoutes />
           </ErrorBoundary>
@@ -125,6 +133,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path='/' element={<HomeScreen />} />
+      <Route path='/about' element={<AboutScreen />} />
       {/* <Route path='/list' element={<ReadingListScreen />} />
       <Route path='/finished' element={<FinishedScreen />} />
       <Route path='/discover' element={<DiscoverBooksScreen />} />
