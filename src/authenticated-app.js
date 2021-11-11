@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 
 import 'authenticated-app.css';
-import { Routes, Route, Link as RouterLink } from 'react-router-dom';
+import { Routes, Route, Link as RouterLink, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Button, ErrorMessage, FullPageErrorFallback } from './components/lib';
 // import * as mq from './styles/media-queries';
@@ -10,6 +10,9 @@ import * as colors from './styles/colors';
 import { useAuth } from './context/auth-context';
 import { HomeScreen } from 'screens/home';
 import { AboutScreen } from 'screens/about';
+import { DepositScreen } from 'screens/deposit';
+import { InvestScreen } from 'screens/invest';
+import React, { useState } from 'react';
 
 function ErrorFallback({ error }) {
   return (
@@ -28,6 +31,13 @@ function ErrorFallback({ error }) {
 
 function AuthenticatedApp() {
   const { user, logout } = useAuth();
+  const locationPath = useLocation().pathname;
+  const [enablePrimaryMenu, setEnablePrimaryMenu] = useState(true);
+
+  React.useEffect(() => {
+    console.log(locationPath);
+    setEnablePrimaryMenu(locationPath === '/' || locationPath === '/about');
+  }, [locationPath]);
 
   return (
     <ErrorBoundary
@@ -64,29 +74,61 @@ function AuthenticatedApp() {
               Crop Farming
             </div>
           </RouterLink>
-          <RouterLink to='/getting-started'>
-            <Button
+          {enablePrimaryMenu ? (
+            <RouterLink to='/deposit'>
+              <Button
+                css={{
+                  marginLeft: '20px',
+                  borderRadius: '7px',
+                  fontSize: '18px',
+                }}
+                className='deposit'
+              >
+                Getting Started
+              </Button>
+            </RouterLink>
+          ) : null}
+          {enablePrimaryMenu ? (
+            <RouterLink
               css={{
-                marginLeft: '20px',
-                borderRadius: '7px',
                 fontSize: '18px',
+                padding: '0px 10px',
+                color: colors.text,
               }}
-              className='getting-started'
+              to='/about'
+              className='about'
             >
-              Getting Started
-            </Button>
-          </RouterLink>
-          <RouterLink
-            css={{
-              fontSize: '18px',
-              padding: '0px 10px',
-              color: colors.text,
-            }}
-            to='/about'
-            className='about'
-          >
-            About
-          </RouterLink>
+              About
+            </RouterLink>
+          ) : null}
+          {!enablePrimaryMenu ? (
+            <RouterLink to='/deposit'>
+              <Button
+                css={{
+                  marginLeft: '20px',
+                  borderRadius: '7px',
+                  fontSize: '18px',
+                }}
+                className='deposit'
+              >
+                Deposit
+              </Button>
+            </RouterLink>
+          ) : null}
+          {!enablePrimaryMenu ? (
+            <RouterLink to='/invest'>
+              <Button
+                css={{
+                  marginLeft: '20px',
+                  borderRadius: '7px',
+                  fontSize: '18px',
+                }}
+                className='invest'
+              >
+                Invest
+              </Button>
+            </RouterLink>
+          ) : null}
         </div>
         <div
           css={{
@@ -134,6 +176,8 @@ function AppRoutes() {
     <Routes>
       <Route path='/' element={<HomeScreen />} />
       <Route path='/about' element={<AboutScreen />} />
+      <Route path='/deposit' element={<DepositScreen />} />
+      <Route path='/invest' element={<InvestScreen />} />
       {/* <Route path='/list' element={<ReadingListScreen />} />
       <Route path='/finished' element={<FinishedScreen />} />
       <Route path='/discover' element={<DiscoverBooksScreen />} />

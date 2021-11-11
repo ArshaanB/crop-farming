@@ -57,8 +57,8 @@ function HomeScreen() {
       <p css={{ fontSize: '1.25em' }}>What do you actually do with my money?</p>
       <ul css={{ fontSize: '1.10em' }}>
         <li>
-          To keep it brief (a more in-depth explanation is coming soon): owning crypto assets is
-          like owning an extra house.
+          To keep it brief (a more in-depth explanation is coming soon) owning crypto assets is like
+          owning an extra house.
         </li>
         <li>
           You don't want to leave your house idle so you decide to rent it out. Similarly, you can

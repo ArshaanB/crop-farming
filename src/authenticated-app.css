@@ -1,8 +1,9 @@
 .logo:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-.getting-started:hover {
+.deposit:hover,
+.invest:hover {
   color: #facc4f;
 }
 .about:hover {
