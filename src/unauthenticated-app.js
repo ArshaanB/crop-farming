@@ -4,6 +4,7 @@ import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { Input, Button, Spinner, FormGroup, ErrorMessage } from 'components/lib';
 import { Modal, ModalContents, ModalOpenButton } from 'components/modal';
+import { InfoAlert } from 'components/lib';
 import { useAuth } from 'context/auth-context';
 import { useAsync } from 'utils/hooks';
 import * as colors from './styles/colors';
@@ -107,6 +108,10 @@ function UnauthenticatedApp() {
           </ModalContents>
         </Modal>
       </div>
+      <InfoAlert>
+        It's highly recommended you use this website on a larger screen (i.e. a laptop, desktop,
+        iPad, etc.)
+      </InfoAlert>
     </div>
   );
 }

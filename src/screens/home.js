@@ -49,7 +49,7 @@ function HomeScreen() {
       <p
         css={{
           fontSize: '22px',
-          marginTop: '2em',
+          marginTop: '2.5em',
         }}
       >
         FAQ (more Q&A coming soon)

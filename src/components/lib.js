@@ -1,18 +1,19 @@
 /** @jsx jsx */
-import {jsx} from '@emotion/core'
+import { jsx } from '@emotion/core';
 
-import {Link as RouterLink} from 'react-router-dom'
-import styled from '@emotion/styled/macro'
-import {keyframes} from '@emotion/core'
-import * as colors from 'styles/colors'
-import * as mq from 'styles/media-queries'
-import {Dialog as ReachDialog} from '@reach/dialog'
-import {FaSpinner} from 'react-icons/fa'
+import { Link as RouterLink } from 'react-router-dom';
+import styled from '@emotion/styled/macro';
+import { keyframes } from '@emotion/core';
+import * as colors from 'styles/colors';
+import * as mq from 'styles/media-queries';
+import { Dialog as ReachDialog } from '@reach/dialog';
+import { Alert as ReachAlert } from '@reach/alert';
+import { FaSpinner } from 'react-icons/fa';
 
 const spin = keyframes({
-  '0%': {transform: 'rotate(0deg)'},
-  '100%': {transform: 'rotate(360deg)'},
-})
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(360deg)' },
+});
 
 const CircleButton = styled.button({
   borderRadius: '30px',
@@ -27,7 +28,7 @@ const CircleButton = styled.button({
   color: colors.text,
   border: `1px solid ${colors.gray10}`,
   cursor: 'pointer',
-})
+});
 
 const BookListUL = styled.ul({
   listStyle: 'none',
@@ -35,14 +36,14 @@ const BookListUL = styled.ul({
   display: 'grid',
   gridTemplateRows: 'repeat(auto-fill, minmax(100px, 1fr))',
   gridGap: '1em',
-})
+});
 
 const Spinner = styled(FaSpinner)({
   animation: `${spin} 1s linear infinite`,
-})
+});
 Spinner.defaultProps = {
   'aria-label': 'loading',
-}
+};
 
 const buttonVariants = {
   primary: {
@@ -53,7 +54,7 @@ const buttonVariants = {
     background: colors.lightyellow,
     color: colors.text,
   },
-}
+};
 const Button = styled.button(
   {
     padding: '10px 15px',
@@ -61,17 +62,17 @@ const Button = styled.button(
     lineHeight: '1',
     borderRadius: '3px',
   },
-  ({variant = 'primary'}) => buttonVariants[variant],
-)
+  ({ variant = 'primary' }) => buttonVariants[variant]
+);
 
 const inputStyles = {
   border: '1px solid #f1f1f4',
   background: '#f1f2f7',
   padding: '8px 12px',
-}
+};
 
-const Input = styled.input({borderRadius: '3px'}, inputStyles)
-const Textarea = styled.textarea(inputStyles)
+const Input = styled.input({ borderRadius: '3px' }, inputStyles);
+const Textarea = styled.textarea(inputStyles);
 
 const Dialog = styled(ReachDialog)({
   maxWidth: '450px',
@@ -83,12 +84,12 @@ const Dialog = styled(ReachDialog)({
     width: '100%',
     margin: '10vh auto',
   },
-})
+});
 
 const FormGroup = styled.div({
   display: 'flex',
   flexDirection: 'column',
-})
+});
 
 function FullPageSpinner() {
   return (
@@ -104,7 +105,21 @@ function FullPageSpinner() {
     >
       <Spinner />
     </div>
-  )
+  );
+}
+
+function InfoAlert(props) {
+  return (
+    <ReachAlert
+      style={{
+        marginTop: '1em',
+        background: 'hsla(10, 50%, 25%, .10)',
+        padding: '10px',
+      }}
+    >
+      {props.children}
+    </ReachAlert>
+  );
 }
 
 const Link = styled(RouterLink)({
@@ -113,37 +128,33 @@ const Link = styled(RouterLink)({
     color: colors.indigoDarken10,
     textDecoration: 'underline',
   },
-})
+});
 
 const errorMessageVariants = {
-  stacked: {display: 'block'},
-  inline: {display: 'inline-block'},
-}
+  stacked: { display: 'block' },
+  inline: { display: 'inline-block' },
+};
 
-function ErrorMessage({error, variant = 'stacked', ...props}) {
+function ErrorMessage({ error, variant = 'stacked', ...props }) {
   return (
-    <div
-      role="alert"
-      css={[{color: colors.danger}, errorMessageVariants[variant]]}
-      {...props}
-    >
+    <div role='alert' css={[{ color: colors.danger }, errorMessageVariants[variant]]} {...props}>
       <span>There was an error: </span>
       <pre
         css={[
-          {whiteSpace: 'break-spaces', margin: '0', marginBottom: -5},
+          { whiteSpace: 'break-spaces', margin: '0', marginBottom: -5 },
           errorMessageVariants[variant],
         ]}
       >
         {error.message}
       </pre>
     </div>
-  )
+  );
 }
 
-function FullPageErrorFallback({error}) {
+function FullPageErrorFallback({ error }) {
   return (
     <div
-      role="alert"
+      role='alert'
       css={{
         color: colors.danger,
         height: '100vh',
@@ -156,7 +167,7 @@ function FullPageErrorFallback({error}) {
       <p>Uh oh... There's a problem. Try refreshing the app.</p>
       <pre>{error.message}</pre>
     </div>
-  )
+  );
 }
 
 export {
@@ -172,4 +183,5 @@ export {
   FormGroup,
   FullPageSpinner,
   Link,
-}
+  InfoAlert,
+};
