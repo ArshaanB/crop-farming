@@ -5,8 +5,7 @@ import faunadb from 'faunadb'; /* Import faunaDB sdk */
 const q = faunadb.query;
 const client = new faunadb.Client({
   secret: process.env.FAUNADB_SECRET,
-  domain: 'db.fauna.com',
-  scheme: 'https',
+  domain: 'db.us.fauna.com',
 });
 
 /* export our lambda function as named "handler" export */

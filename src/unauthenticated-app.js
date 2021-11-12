@@ -65,6 +65,9 @@ function UnauthenticatedApp() {
 
   React.useEffect(() => {
     fetch('/.netlify/functions/todos-create', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify('123'),
       method: 'POST',
     }).then((response) => {
