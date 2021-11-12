@@ -5,26 +5,20 @@ import faunadb from 'faunadb'; /* Import faunaDB sdk */
 const q = faunadb.query;
 const client = new faunadb.Client({
   secret: process.env.FAUNADB_SECRET,
+  domain: 'db.fauna.com',
+  scheme: 'https',
 });
 
 /* export our lambda function as named "handler" export */
 exports.handler = (event, context, callback) => {
-  return callback(null, {
-    statusCode: 200,
-    body: JSON.stringify('testing testing'),
-  });
-  /* parse the string body into a useable JS object */
-  const data = JSON.parse(event.body);
-  console.log('Function `todo-create` invoked', data);
-  const todoItem = {
-    data: data,
-  };
-  /* construct the fauna query */
+  //   return callback(null, {
+  //     statusCode: 200,
+  //     body: JSON.stringify('testing testing'),
+  //   });
   return client
-    .query(q.Create(q.Ref('classes/todos'), todoItem))
+    .query(q.Get(q.Ref(q.Collection('customers'), '101')))
     .then((response) => {
       console.log('success', response);
-      /* Success! return the response with statusCode 200 */
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(response),
@@ -32,7 +26,6 @@ exports.handler = (event, context, callback) => {
     })
     .catch((error) => {
       console.log('error', error);
-      /* Error! return the error with statusCode 400 */
       return callback(null, {
         statusCode: 400,
         body: JSON.stringify(error),
