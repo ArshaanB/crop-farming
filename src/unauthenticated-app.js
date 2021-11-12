@@ -69,6 +69,7 @@ function UnauthenticatedApp() {
       method: 'POST',
     }).then((response) => {
       console.log(response);
+      console.log(response.json());
     });
   });
 
