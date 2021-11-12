@@ -62,6 +62,16 @@ function LoginForm({ onSubmit, submitButton }) {
 
 function UnauthenticatedApp() {
   const { login, register } = useAuth();
+
+  React.useEffect(() => {
+    fetch('/.netlify/functions/todos-create', {
+      body: JSON.stringify('123'),
+      method: 'POST',
+    }).then((response) => {
+      console.log(response);
+    });
+  });
+
   return (
     <div
       css={{
