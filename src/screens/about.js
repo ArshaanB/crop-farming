@@ -12,7 +12,7 @@ function AboutScreen() {
           marginTop: '25px',
         }}
       >
-        Hey, nice to meet you, I'm Arshaan. Here are links to some of my profiles so you can put a face to all these words.
+        Hey, nice to meet you, I'm Arshaan. Here are links to some of my profiles so you can put a face to all this text.
       </p>
       <ul
         css={{
