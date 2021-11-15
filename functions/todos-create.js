@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
   const { q, client } = configureFaunaDBClient();
 
   return client
-    .query(q.Get(q.Ref(q.Collection('customers'), '101')))
+    .query(q.Get(q.Ref(q.Collection('customers_demo'), '101')))
     .then((response) => {
       console.log('success', response);
       return callback(null, {
