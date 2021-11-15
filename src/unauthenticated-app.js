@@ -63,26 +63,6 @@ function LoginForm({ onSubmit, submitButton }) {
 function UnauthenticatedApp() {
   const { login, register } = useAuth();
 
-  React.useEffect(() => {
-    fetch('/.netlify/functions/all_functions', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'test@test.com',
-        name: 'Ronda',
-      }),
-      method: 'POST',
-    })
-      .then((response) => {
-        // console.log(response);
-        // console.log(response.json());
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <div
       css={{

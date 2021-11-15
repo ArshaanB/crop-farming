@@ -7,6 +7,7 @@ import * as auth from 'auth-provider';
 import { client } from 'utils/api-client';
 import { useAsync } from 'utils/hooks';
 import { FullPageSpinner, FullPageErrorFallback } from 'components/lib';
+// import { createUser } from 'utils/user-details';
 
 async function bootstrapAppData() {
   let user = null;
@@ -48,7 +49,37 @@ function AuthProvider(props) {
   //  register).
   const register = React.useCallback(
     (form) => {
-      return auth.register(form).then(() => login(form));
+      return auth.register(form).then(() => {
+        const TestUser = {
+          email: 'test@test.com',
+          name: 'Ronda',
+          registrationDate: new Date(),
+        };
+        // createUser(TestUser);
+        client('create_user', { data: { TestUser } });
+        /*
+          React.useEffect(() => {
+    fetch('/.netlify/functions/create_user', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'test@test.com',
+        name: 'Ronda',
+        registrationDate: new Date(),
+      }),
+      method: 'POST',
+    })
+      .then((response) => {
+        // console.log(response);
+        // console.log(response.json());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []); */
+        login(form);
+      });
     },
     [login]
   );

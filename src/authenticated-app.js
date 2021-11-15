@@ -5,7 +5,6 @@ import 'authenticated-app.css';
 import { Routes, Route, Link as RouterLink, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Button, ErrorMessage, FullPageErrorFallback } from './components/lib';
-// import * as mq from './styles/media-queries';
 import * as colors from './styles/colors';
 import { useAuth } from './context/auth-context';
 import { HomeScreen } from 'screens/home';
@@ -145,10 +144,6 @@ function AuthenticatedApp() {
           </Button>
         </div>
       </div>
-      {/* Removed margin: '0 auto', from css below.
-        [mq.small]: {
-          width: '100%',
-        }, and many more styles.*/}
       <div
         css={{
           padding: '4em 2em',
@@ -178,11 +173,6 @@ function AppRoutes() {
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/deposit' element={<DepositScreen />} />
       <Route path='/invest' element={<InvestScreen />} />
-      {/* <Route path='/list' element={<ReadingListScreen />} />
-      <Route path='/finished' element={<FinishedScreen />} />
-      <Route path='/discover' element={<DiscoverBooksScreen />} />
-      <Route path='/book/:bookId' element={<BookScreen />} />
-      <Route path='*' element={<NotFoundScreen />} /> */}
     </Routes>
   );
 }
