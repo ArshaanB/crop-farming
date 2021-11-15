@@ -1,11 +1,8 @@
-import {queryCache} from 'react-query'
-import * as auth from 'auth-provider'
-const apiURL = process.env.NETLIFY_API_URL
+import { queryCache } from 'react-query';
+import * as auth from 'auth-provider';
+const apiURL = process.env.REACT_APP_NETLIFY_API_URL;
 
-async function client(
-  endpoint,
-  {data, token, headers: customHeaders, ...customConfig} = {},
-) {
+async function client(endpoint, { data, token, headers: customHeaders, ...customConfig } = {}) {
   const config = {
     method: data ? 'POST' : 'GET',
     body: data ? JSON.stringify(data) : undefined,
@@ -15,23 +12,23 @@ async function client(
       ...customHeaders,
     },
     ...customConfig,
-  }
+  };
 
-  return window.fetch(`${apiURL}/${endpoint}`, config).then(async response => {
+  return window.fetch(`${apiURL}/${endpoint}`, config).then(async (response) => {
     if (response.status === 401) {
-      queryCache.clear()
-      await auth.logout()
+      queryCache.clear();
+      await auth.logout();
       // refresh the page for them
-      window.location.assign(window.location)
-      return Promise.reject({message: 'Please re-authenticate.'})
+      window.location.assign(window.location);
+      return Promise.reject({ message: 'Please re-authenticate.' });
     }
-    const data = await response.json()
+    const data = await response.json();
     if (response.ok) {
-      return data
+      return data;
     } else {
-      return Promise.reject(data)
+      return Promise.reject(data);
     }
-  })
+  });
 }
 
-export {client}
+export { client };
