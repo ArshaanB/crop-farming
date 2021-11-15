@@ -1,19 +1,17 @@
-/* code from functions/todos-create.js */
-import faunadb from 'faunadb'; /* Import faunaDB sdk */
+import faunadb from 'faunadb';
 
-/* configure faunaDB Client with our secret */
-const q = faunadb.query;
-const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SECRET,
-  domain: 'db.us.fauna.com',
-});
+function configureFaunaDBClient() {
+  const q = faunadb.query;
+  const client = new faunadb.Client({
+    secret: process.env.FAUNADB_SECRET,
+    domain: 'db.us.fauna.com',
+  });
+  return { q, client };
+}
 
-/* export our lambda function as named "handler" export */
 exports.handler = (event, context, callback) => {
-  //   return callback(null, {
-  //     statusCode: 200,
-  //     body: JSON.stringify('testing testing'),
-  //   });
+  const { q, client } = configureFaunaDBClient();
+
   return client
     .query(q.Get(q.Ref(q.Collection('customers'), '101')))
     .then((response) => {
