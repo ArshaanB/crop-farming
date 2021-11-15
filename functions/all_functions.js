@@ -12,17 +12,21 @@ function configureFaunaDBClient() {
 exports.handler = (event, context, callback) => {
   const { q, client } = configureFaunaDBClient();
 
+  // Parse the string body into a useable object.
+  const data = JSON.parse(event.body);
+  const customerItem = {
+    data: data,
+  };
+
   return client
-    .query(q.Get(q.Ref(q.Collection('customers_demo'), '101')))
+    .query(q.Create(q.Collection('customers'), customerItem))
     .then((response) => {
-      console.log('success', response);
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(response),
       });
     })
     .catch((error) => {
-      console.log('error', error);
       return callback(null, {
         statusCode: 400,
         body: JSON.stringify(error),
