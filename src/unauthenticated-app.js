@@ -9,18 +9,17 @@ import { useAuth } from 'context/auth-context';
 import { useAsync } from 'utils/hooks';
 import * as colors from './styles/colors';
 
-function LoginForm({ onSubmit, submitButton }) {
+function LoginForm({ onSubmit, submitButton, formType = 'login' }) {
   const { isLoading, isError, error, run } = useAsync();
   function handleSubmit(event) {
     event.preventDefault();
-    const { email, password } = event.target.elements;
-
-    run(
-      onSubmit({
-        email: email.value,
-        password: password.value,
-      })
-    );
+    const { email, password, full_name = null } = event.target.elements;
+    let submitForm = {
+      full_name: full_name?.value,
+      email: email.value,
+      password: password.value,
+    };
+    run(onSubmit({ ...submitForm }));
   }
 
   return (
@@ -37,6 +36,12 @@ function LoginForm({ onSubmit, submitButton }) {
         },
       }}
     >
+      {formType === 'register' ? (
+        <FormGroup>
+          <label htmlFor='full_name'>Full Name</label>
+          <Input id='full_name' type='text' />
+        </FormGroup>
+      ) : null}
       <FormGroup>
         <label htmlFor='email'>Email</label>
         <Input id='email' type='email' />
@@ -105,6 +110,7 @@ function UnauthenticatedApp() {
             <LoginForm
               onSubmit={register}
               submitButton={<Button variant='secondary'>Register</Button>}
+              formType='register'
             />
           </ModalContents>
         </Modal>

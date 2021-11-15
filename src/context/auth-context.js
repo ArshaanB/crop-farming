@@ -50,34 +50,13 @@ function AuthProvider(props) {
   const register = React.useCallback(
     (form) => {
       return auth.register(form).then(() => {
-        const TestUser = {
-          email: 'test@test.com',
-          name: 'Ronda',
+        console.log(form.full_name);
+        const NewUser = {
+          email: form.email,
+          name: form.full_name,
           registrationDate: new Date(),
         };
-        // createUser(TestUser);
-        client('create_user', { data: { TestUser } });
-        /*
-          React.useEffect(() => {
-    fetch('/.netlify/functions/create_user', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'test@test.com',
-        name: 'Ronda',
-        registrationDate: new Date(),
-      }),
-      method: 'POST',
-    })
-      .then((response) => {
-        // console.log(response);
-        // console.log(response.json());
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []); */
+        client('create_user', { data: { ...NewUser } });
         login(form);
       });
     },
