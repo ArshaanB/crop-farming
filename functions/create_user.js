@@ -9,7 +9,7 @@ function configureFaunaDBClient() {
   return { q, client };
 }
 
-exports.handler = (event, context, callback) => {
+exports.handler = async (event, context, callback) => {
   const { q, client } = configureFaunaDBClient();
 
   // Parse the string body into a useable object.
@@ -21,15 +21,15 @@ exports.handler = (event, context, callback) => {
   return client
     .query(q.Create(q.Collection('customers'), customerItem))
     .then((response) => {
-      return callback(null, {
+      return {
         statusCode: 200,
         body: JSON.stringify(response),
-      });
+      };
     })
     .catch((error) => {
-      return callback(null, {
+      return {
         statusCode: 400,
         body: JSON.stringify(error),
-      });
+      };
     });
 };
