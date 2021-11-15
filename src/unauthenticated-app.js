@@ -116,8 +116,7 @@ function UnauthenticatedApp() {
         </Modal>
       </div>
       <InfoAlert>
-        It's highly recommended you use this website on a larger screen (i.e. a laptop, desktop,
-        iPad, etc.)
+        We recommended using this website on a larger screen (e.g. a laptop, a desktop computer, or an iPad).
       </InfoAlert>
     </div>
   );
