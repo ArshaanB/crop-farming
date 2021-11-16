@@ -20,8 +20,8 @@ function HomeScreen() {
           marginTop: '25px',
         }}
       >
-        Crop Farming takes the process of earning yield on your crypto-assets and makes it
-        accessible to you, the general public.
+        Crop Farming takes the difficult process of earning yield on idle crypto-assets and
+        makes it accessible to you, the general public.
       </p>
       <p css={{ fontSize: '22px', display: 'flex' }}>
         <span css={{ fontSize: '16px', marginRight: '10px', width: '4em', alignSelf: 'center' }}>
@@ -41,7 +41,7 @@ function HomeScreen() {
         </span>{' '}
         Browse our collection of investments and select one that fits your risk profile best.
       </p>
-      <p css={{ fontSize: '22px', marginTop: '2em' }}>
+      <p css={{ fontSize: '22px', marginTop: '1em' }}>
         Now sit back, relax, and watch your investment grow.
       </p>
 

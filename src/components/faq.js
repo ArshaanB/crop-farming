@@ -6,17 +6,21 @@ const faqs = [
   {
     question: 'What do you actually do with my money?',
     answer: [
-      `To keep it brief (a more in-depth explanation is coming soon) owning crypto assets is like owning an extra house.`,
-      `You don't want to leave your house idle so you decide to rent it out. Similarly, you can earn income on your crypto assets.`,
-      `To use more accurate technical terms (explanations coming soon), we will be "yield
-      farming" after converting your dollars to certain crypto assets (i.e. stablecoins like
-      USDC).`,
+      `Owning crypto assets is like owning an extra house. You don't want to leave your house idle so you decide to rent it out. Similarly, you can earn income on your idle crypto assets.`,
+      `For the more technical users, we will be "yield
+      farming" after converting your dollars to certain crypto assets (e.g. stablecoins like USDC or to Bitcoin).`,
     ],
   },
   {
-    question: 'I have a problem, how do I get in touch?',
+    question: 'Do I need crypto assets to use your product?',
     answer: [
-      `Email questions@cropfarming.org if you have any urgent questions or want to get in touch!`,
+      `No! Actually, to begin with, we'd prefer you deposit just dollars to keep things simple. We'll show you exactly how to deposit any funds once you click the green "Getting Started" button at the top of the page.`,
+    ],
+  },
+  {
+    question: 'I have a problem, how can I get in touch?',
+    answer: [
+      `Email questions@cropfarming.org if you have any questions, ideas, bugs or just want to chat!`,
     ],
   },
 ];
@@ -27,7 +31,7 @@ function classNames(...classes) {
 
 function FAQ() {
   return (
-    <div className='bg-gray-50'>
+    <div className='bg-gray-50 mt-6'>
       <div className='max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8'>
         <div className='max-w-3xl mx-auto divide-y-2 divide-gray-200'>
           <h2 className='text-center text-3xl font-extrabold text-gray-900 sm:text-4xl'>
@@ -55,7 +59,7 @@ function FAQ() {
                     <Disclosure.Panel as='dd' className='mt-2 pr-12'>
                       {Array.isArray(faq.answer) ? (
                         faq.answer.map((answer) => (
-                          <p className='text-base text-gray-500'>{answer}</p>
+                          <p className='text-base text-gray-500 my-2'>{answer}</p>
                         ))
                       ) : (
                         <p className='text-base text-gray-500'>{faq.answer}</p>
