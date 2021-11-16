@@ -21,14 +21,13 @@ function HomeScreen() {
         }}
       >
         Crop Farming takes the process of earning yield on your crypto-assets and makes it
-        accessible to you, general public.
+        accessible to you, the general public.
       </p>
       <p css={{ fontSize: '22px', display: 'flex' }}>
         <span css={{ fontSize: '16px', marginRight: '10px', width: '4em', alignSelf: 'center' }}>
           Step 1
         </span>
-        Click the bright green "Getting Started" button at the top of the page to set up your
-        account for Step 2 and Step 3.
+        Click the bright green "Getting Started" button at the top of the page.
       </p>
       <p css={{ fontSize: '22px', display: 'flex' }}>
         <span css={{ fontSize: '16px', marginRight: '10px', width: '4em', alignSelf: 'center' }}>
