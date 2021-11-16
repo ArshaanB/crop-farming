@@ -24,7 +24,7 @@ function DepositForm() {
 
     run(
       depositTicket({
-        email: email.value,
+        email: email,
         amount: amount.value,
         depositMethod: depositMethodValue,
         referenceNumber: referenceNumber.value,
