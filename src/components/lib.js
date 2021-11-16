@@ -115,7 +115,7 @@ function InfoAlert(props) {
         marginTop: '1em',
         background: 'hsla(10, 50%, 25%, .10)',
         padding: '10px',
-        width: '90%',
+        maxWidth: '90%',
       }}
     >
       {props.children}

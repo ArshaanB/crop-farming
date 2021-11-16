@@ -80,13 +80,16 @@ function UnauthenticatedApp() {
       }}
     >
       <img src='logo.png' width='80' height='80' alt='' />
-      <h1
+      <p
         css={{
           color: colors.green,
+          fontSize: '2.5em',
+          fontWeight: '600',
+          marginBottom: '0.5em',
         }}
       >
         Crop Farming
-      </h1>
+      </p>
       <div
         css={{
           display: 'grid',
@@ -99,7 +102,14 @@ function UnauthenticatedApp() {
             <Button variant='primary'>Login</Button>
           </ModalOpenButton>
           <ModalContents aria-label='Login form' title='Login'>
-            <LoginForm onSubmit={login} submitButton={<Button variant='primary'>Login</Button>} />
+            <LoginForm
+              onSubmit={login}
+              submitButton={
+                <Button variant='primary' css={{ display: 'flex', flexDirection: 'row' }}>
+                  Login
+                </Button>
+              }
+            />
           </ModalContents>
         </Modal>
         <Modal>
@@ -109,14 +119,19 @@ function UnauthenticatedApp() {
           <ModalContents aria-label='Registration form' title='Register'>
             <LoginForm
               onSubmit={register}
-              submitButton={<Button variant='secondary'>Register</Button>}
+              submitButton={
+                <Button variant='secondary' css={{ display: 'flex', flexDirection: 'row' }}>
+                  Register
+                </Button>
+              }
               formType='register'
             />
           </ModalContents>
         </Modal>
       </div>
       <InfoAlert>
-        We recommended using this website on a larger screen (e.g. a laptop, a desktop computer, or an iPad).
+        We recommended using this website on a larger screen (e.g. a laptop, a desktop computer, or
+        an iPad).
       </InfoAlert>
     </div>
   );

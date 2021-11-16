@@ -5,11 +5,12 @@ import { App } from 'App';
 import reportWebVitals from 'reportWebVitals';
 import { AppProviders } from 'context/index';
 
+import './index.css';
+
 ReactDOM.render(
   <AppProviders>
     <App />
-  </AppProviders>
-  ,
+  </AppProviders>,
   document.getElementById('root')
 );
 
