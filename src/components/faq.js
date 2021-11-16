@@ -4,7 +4,7 @@ import * as React from 'react';
 
 const faqs = [
   {
-    question: 'What do you actually do with my money?',
+    question: 'What are you doing with my money?',
     answer: [
       `Owning crypto assets is like owning an extra house. You don't want to leave your house idle so you decide to rent it out. Similarly, you can earn income on your idle crypto assets.`,
       `For the more technical users, we will be "yield
@@ -12,7 +12,7 @@ const faqs = [
     ],
   },
   {
-    question: 'Do I need crypto assets to use your product?',
+    question: 'Do I need crypto assets (e.g. Bitcoin, Ethereum) to use your product?',
     answer: [
       `No! Actually, to begin with, we'd prefer you deposit just dollars to keep things simple. We'll show you exactly how to deposit any funds once you click the green "Getting Started" button at the top of the page.`,
     ],

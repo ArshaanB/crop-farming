@@ -1,10 +1,12 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
+import { DepositForm } from '../components/deposit-form';
+
 // import * as React from 'react';
 
 function DepositScreen() {
-  return <div>You must have a beta invite to access this page.</div>;
+  return <DepositForm></DepositForm>;
 }
 
 export { DepositScreen };

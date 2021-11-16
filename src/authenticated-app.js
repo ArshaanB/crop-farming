@@ -11,6 +11,7 @@ import { HomeScreen } from 'screens/home';
 import { AboutScreen } from 'screens/about';
 import { DepositScreen } from 'screens/deposit';
 import { InvestScreen } from 'screens/invest';
+import { DepositSuccessScreen } from 'screens/deposit-success';
 import React, { useState } from 'react';
 
 function ErrorFallback({ error }) {
@@ -34,7 +35,6 @@ function AuthenticatedApp() {
   const [enablePrimaryMenu, setEnablePrimaryMenu] = useState(true);
 
   React.useEffect(() => {
-    console.log(locationPath);
     setEnablePrimaryMenu(locationPath === '/' || locationPath === '/about');
   }, [locationPath]);
 
@@ -110,7 +110,7 @@ function AuthenticatedApp() {
                 }}
                 className='deposit'
               >
-                Deposit
+                Step 1: Deposit
               </Button>
             </RouterLink>
           ) : null}
@@ -124,7 +124,7 @@ function AuthenticatedApp() {
                 }}
                 className='invest'
               >
-                Invest
+                Step 2: Invest
               </Button>
             </RouterLink>
           ) : null}
@@ -172,6 +172,7 @@ function AppRoutes() {
       <Route path='/' element={<HomeScreen />} />
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/deposit' element={<DepositScreen />} />
+      <Route path='/deposit-success' element={<DepositSuccessScreen />} />
       <Route path='/invest' element={<InvestScreen />} />
     </Routes>
   );

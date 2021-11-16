@@ -50,11 +50,18 @@ function AuthProvider(props) {
   const register = React.useCallback(
     (form) => {
       return auth.register(form).then(() => {
-        console.log(form.full_name);
         const NewUser = {
           email: form.email,
           name: form.full_name,
           registrationDate: new Date(),
+          finances: {
+            availableBalance: 0,
+            invested: {
+              pool1: 0,
+              pool2: 0,
+              pool3: 0,
+            },
+          },
         };
         client('create_user', { data: { ...NewUser } });
         login(form);
