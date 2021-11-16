@@ -12,7 +12,7 @@ function HomeScreen() {
           marginTop: '25px',
         }}
       >
-        You can earn 20%, 50% or 150% on your dollars every year, here's how!
+        You can earn 20%, 50% or 150% on your dollars every year!
       </p>
       <p
         css={{
@@ -42,7 +42,7 @@ function HomeScreen() {
         Browse our collection of investments and select one that fits your risk profile best.
       </p>
       <p css={{ fontSize: '22px', marginTop: '2em' }}>
-        Now sit back, relax, and watch investment grow.
+        Now sit back, relax, and watch your investment grow.
       </p>
 
       <FAQ></FAQ>
