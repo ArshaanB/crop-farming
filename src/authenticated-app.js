@@ -152,11 +152,7 @@ function AuthenticatedApp() {
           justifyContent: 'center',
         }}
       >
-        <main
-          css={{
-            width: '80%',
-          }}
-        >
+        <main>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <AppRoutes />
           </ErrorBoundary>
