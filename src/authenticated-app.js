@@ -83,7 +83,7 @@ function AuthenticatedApp() {
                 }}
                 className='deposit'
               >
-                Getting Started
+                Get Started
               </Button>
             </RouterLink>
           ) : null}
@@ -146,13 +146,13 @@ function AuthenticatedApp() {
       </div>
       <div
         css={{
-          padding: '4em 2em',
           display: 'flex',
           width: '100%',
           justifyContent: 'center',
         }}
+        className='pt-16 border-b-4'
       >
-        <main>
+        <main className="w-full">
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <AppRoutes />
           </ErrorBoundary>

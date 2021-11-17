@@ -6,7 +6,9 @@ import { DepositForm } from '../components/deposit-form';
 // import * as React from 'react';
 
 function DepositScreen() {
-  return <DepositForm></DepositForm>;
+  return (
+    <DepositForm></DepositForm>
+  );
 }
 
 export { DepositScreen };
