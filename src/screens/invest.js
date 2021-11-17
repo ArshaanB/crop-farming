@@ -1,10 +1,16 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
+import { InvestForm } from '../components/invest-form';
+
 // import * as React from 'react';
 
 function InvestScreen() {
-  return <div>You must have a beta invite to access this page.</div>;
+  return (
+    <div>
+      <InvestForm></InvestForm>
+    </div>
+  );
 }
 
 export { InvestScreen };

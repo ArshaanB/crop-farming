@@ -18,6 +18,12 @@ const faqs = [
     ],
   },
   {
+    question: 'How can I withdraw my funds? How can I move money between "crop pools"?',
+    answer: [
+      `Withdrawing and moving funds between pools is functionality that is coming soon - but don't worry! If you ever want to remove funds or move them between "crop pools" just email questions@cropfarming.org at any time with your request.`,
+    ],
+  },
+  {
     question: 'I have a problem, how can I get in touch?',
     answer: [
       `Email questions@cropfarming.org if you have any questions, ideas, bugs or just want to chat!`,
