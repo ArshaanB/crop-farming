@@ -19,9 +19,7 @@ function CompanyScreen() {
         <div className='space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0'>
           <div className='space-y-5 sm:space-y-4'>
             <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>About Us</h2>
-            <p className='text-xl text-gray-500'>
-              Running out of Toronto, Canada.
-            </p>
+            <p className='text-xl text-gray-500'>The company is based out of Toronto, Canada.</p>
           </div>
           <div className='lg:col-span-2'>
             <ul className='space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0'>
@@ -49,6 +47,8 @@ function CompanyScreen() {
                             <a
                               href={person.twitterUrl}
                               className='text-gray-400 hover:text-gray-500'
+                              target='_blank'
+                              rel='noreferrer'
                             >
                               <span className='sr-only'>Twitter</span>
                               <svg
@@ -65,6 +65,8 @@ function CompanyScreen() {
                             <a
                               href={person.linkedinUrl}
                               className='text-gray-400 hover:text-gray-500'
+                              target='_blank'
+                              rel='noreferrer'
                             >
                               <span className='sr-only'>LinkedIn</span>
                               <svg
