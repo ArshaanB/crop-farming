@@ -8,7 +8,7 @@ import { Button, ErrorMessage, FullPageErrorFallback } from './components/lib';
 import * as colors from './styles/colors';
 import { useAuth } from './context/auth-context';
 import { HomeScreen } from 'screens/home';
-import { AboutScreen } from 'screens/about';
+import { CompanyScreen } from 'screens/company';
 import { DepositScreen } from 'screens/deposit';
 import { InvestScreen } from 'screens/invest';
 import { DepositSuccessScreen } from 'screens/deposit-success';
@@ -35,7 +35,7 @@ function AuthenticatedApp() {
   const [enablePrimaryMenu, setEnablePrimaryMenu] = useState(true);
 
   React.useEffect(() => {
-    setEnablePrimaryMenu(locationPath === '/' || locationPath === '/about');
+    setEnablePrimaryMenu(locationPath === '/' || locationPath === '/company');
   }, [locationPath]);
 
   return (
@@ -87,19 +87,6 @@ function AuthenticatedApp() {
               </Button>
             </RouterLink>
           ) : null}
-          {enablePrimaryMenu ? (
-            <RouterLink
-              css={{
-                fontSize: '18px',
-                padding: '0px 10px',
-                color: colors.text,
-              }}
-              to='/about'
-              className='about'
-            >
-              About
-            </RouterLink>
-          ) : null}
           {!enablePrimaryMenu ? (
             <RouterLink to='/deposit'>
               <Button
@@ -128,6 +115,17 @@ function AuthenticatedApp() {
               </Button>
             </RouterLink>
           ) : null}
+          <RouterLink
+            css={{
+              fontSize: '18px',
+              padding: '0px 10px',
+              color: colors.text,
+            }}
+            to='/company'
+            className='company'
+          >
+            Company
+          </RouterLink>
         </div>
         <div
           css={{
@@ -150,9 +148,9 @@ function AuthenticatedApp() {
           width: '100%',
           justifyContent: 'center',
         }}
-        className='pt-16 border-b-4'
+        className='pt-16'
       >
-        <main className="w-full">
+        <main className='w-full'>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <AppRoutes />
           </ErrorBoundary>
@@ -166,7 +164,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path='/' element={<HomeScreen />} />
-      <Route path='/about' element={<AboutScreen />} />
+      <Route path='/company' element={<CompanyScreen />} />
       <Route path='/deposit' element={<DepositScreen />} />
       <Route path='/deposit-success' element={<DepositSuccessScreen />} />
       <Route path='/invest' element={<InvestScreen />} />
