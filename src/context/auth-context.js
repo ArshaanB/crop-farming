@@ -7,14 +7,13 @@ import * as auth from 'auth-provider';
 import { client } from 'utils/api-client';
 import { useAsync } from 'utils/hooks';
 import { FullPageSpinner, FullPageErrorFallback } from 'components/lib';
-// import { createUser } from 'utils/user-details';
 
 async function bootstrapAppData() {
   let user = null;
 
   const token = await auth.getToken();
   if (token) {
-    const data = await auth.recover();
+    const data = null;
     user = data?.email;
   }
   return user;
@@ -42,7 +41,10 @@ function AuthProvider(props) {
   }, [run]);
 
   const login = React.useCallback(
-    (form) => auth.login(form).then((user) => setData(user.email)),
+    (form) =>
+      auth.login(form).then((allDetails) => {
+        setData(allDetails.user.email);
+      }),
     [setData]
   );
   // Is better named registerAndLogin (but it only logs in on successful

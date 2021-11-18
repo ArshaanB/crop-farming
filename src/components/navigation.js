@@ -5,7 +5,7 @@ import { useAuth } from '../context/auth-context';
 
 const navigation = [
   { name: 'Get Started', to: '/deposit', menuType: 'primary' },
-  { name: 'Step 1: Deposit', to: '/deposit#', menuType: 'secondary' },
+  { name: 'Step 1: Deposit', to: '/deposit', menuType: 'secondary' },
   { name: 'Step 2: Invest', to: '/invest', menuType: 'secondary' },
   { name: 'Company', to: '/company', menuType: 'always' },
 ];
@@ -39,7 +39,9 @@ function NavigationComponent() {
                   <RouterLink
                     key={link.name}
                     to={link.to}
-                    className='text-base font-medium text-white  hover:no-underline focus:no-underline hover:text-yellow-400'
+                    className={`text-base font-medium text-white hover:no-underline focus:no-underline hover:text-yellow-400 ${
+                      locationPath === link.to ? 'border-b-2 border-yellow-400' : ''
+                    }`}
                   >
                     {link.name}
                   </RouterLink>

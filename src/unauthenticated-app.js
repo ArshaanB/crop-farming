@@ -19,7 +19,9 @@ function LoginForm({ onSubmit, submitButton, formType = 'login' }) {
       email: email.value,
       password: password.value,
     };
-    run(onSubmit({ ...submitForm }));
+    run(onSubmit({ ...submitForm })).catch((err) => {
+      console.log(err);
+    });
   }
 
   return (

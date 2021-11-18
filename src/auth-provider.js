@@ -1,15 +1,31 @@
-import GoTrue from 'gotrue-js';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 
-// pretend this is firebase, netlify, or auth0's code.
-// you shouldn't have to implement something like this in your own app
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Instantiate the GoTrue auth client with an optional configuration
-// TODO: Replace below URL with const authURL = process.env.REACT_APP_AUTH_URL;
-const gotruejsauth = new GoTrue({
-  APIUrl: 'https://cropfarming.org/.netlify/identity',
-  audience: '',
-  setCookie: false,
-});
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_AUTH_API_KEY,
+  authDomain: 'cropfarming-c88dd.firebaseapp.com',
+  projectId: 'cropfarming-c88dd',
+  storageBucket: 'cropfarming-c88dd.appspot.com',
+  messagingSenderId: '985251351844',
+  appId: '1:985251351844:web:1b1312eea630485a2eb7b1',
+  measurementId: 'G-DCM19TQV2S',
+};
+
+// Initialize Firebase
+// const app = 
+initializeApp(firebaseConfig);
+const auth = getAuth();
 
 const localStorageKey = '__auth_provider_token__';
 
@@ -17,51 +33,23 @@ async function getToken() {
   return window.localStorage.getItem(localStorageKey);
 }
 
-async function recover() {
-  return gotruejsauth.currentUser();
-}
-
 function handleUserResponse(allDetails) {
-  const userToken = allDetails?.token?.access_token;
+  const userToken = allDetails?.user?.accessToken;
   window.localStorage.setItem(localStorageKey, userToken);
   return allDetails;
 }
 
 function login({ email, password }) {
-  return gotruejsauth.login(email, password).then(handleUserResponse);
+  return signInWithEmailAndPassword(auth, email, password).then(handleUserResponse);
 }
 
 function register({ email, password }) {
-  return gotruejsauth.signup(email, password);
+  return createUserWithEmailAndPassword(auth, email, password);
 }
 
 async function logout() {
-  const user = gotruejsauth.currentUser();
-  user.logout();
+  signOut(auth);
   window.localStorage.removeItem(localStorageKey);
 }
 
-/*
-// an auth provider wouldn't use your client, they'd have their own
-// so that's why we're not just re-using the client
-const authURL = process.env.REACT_APP_AUTH_URL;
-
-async function client(endpoint, data) {
-  const config = {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json' },
-  };
-
-  return window.fetch(`${authURL}/${endpoint}`, config).then(async (response) => {
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    } else {
-      return Promise.reject(data);
-    }
-  });
-}
-*/
-
-export { getToken, recover, login, register, logout, localStorageKey };
+export { getToken, login, register, logout, localStorageKey };
