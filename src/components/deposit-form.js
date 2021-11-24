@@ -90,7 +90,7 @@ function DepositForm() {
                 How much money would you like to deposit into your account? (We're limiting deposits
                 to a maximum of $1000 per person for now).
               </p>
-              <div className='mt-1 flex rounded-md shadow-sm'>
+              <div className='mt-1 flex rounded-md'>
                 <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm'>
                   $
                 </span>
@@ -115,7 +115,7 @@ function DepositForm() {
               <label htmlFor='username' className='block text-md font-medium text-gray-700'>
                 Reference Number
               </label>
-              <div className='mt-1 flex rounded-md shadow-sm'>
+              <div className='mt-1 flex rounded-md'>
                 <input
                   type='text'
                   name='referenceNumber'

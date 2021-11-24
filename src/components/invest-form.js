@@ -1,104 +1,90 @@
 import * as React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
+import { useAsync } from 'utils/hooks';
 
-import { getCustomer } from 'utils/financial-details';
-
-// These could be useful for colour coating later on.
-// bg-pink-100
-// bg-green-100
-const posts = [
-  {
-    title: 'Crop Pool 1',
-    category: { name: 'Low Risk', color: 'bg-indigo-100 text-indigo-800' },
-    description: 'This pool is lowest-risk with the lowest rewards at 20% APY.',
-  },
-  {
-    title: 'Crop Pool 2',
-    category: { name: 'Medium Risk (Coming Soon!)', color: 'bg-gray-500 text-white' },
-    description: 'This pool is medium-risk with the rewards at 50% APY.',
-  },
-  {
-    title: 'Crop Pool 3',
-    category: { name: 'High Risk (Coming Soon!)', color: 'bg-gray-500 text-white' },
-    description: 'This pool is high-risk with the rewards at 150% APY.',
-  },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
-function calculateInvestedBalance(allPools) {
-  let sum = 0;
-  allPools.forEach((e) => {
-    sum += e;
-  });
-  return sum;
-}
+import { createRequest } from 'utils/financial-details';
 
 function InvestForm() {
+  const navigate = useNavigate();
+  const { run } = useAsync();
   const { user: userDetails } = useAuth();
 
-  const [customerDetails, setCustomerDetails] = React.useState({
-    availableBalance: 0,
-    invested: {
-      pool1: 0,
-      pool2: 0,
-      pool3: 0,
-    },
-  });
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { cropPool, amount } = event.target.elements;
 
-  const investedBalance = calculateInvestedBalance(Object.values(customerDetails.invested));
+    run(createRequest(userDetails.user.uid, cropPool.value, amount.value));
 
-  React.useEffect(() => {
-    getCustomer(userDetails.user.uid).then((customerBalances) => {
-      setCustomerDetails(customerBalances);
-    });
-  }, [userDetails]);
+    navigate('/invest-success');
+  }
 
   return (
-    <div className='bg-white pt-12 pb-20 px-4 sm:px-6 lg:pt-12 lg:pb-28 lg:px-8'>
-      <div className='relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl'>
-        <div>
-          <h2 className='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-            Overview
-          </h2>
-          <p className='mt-3 text-xl text-gray-500 sm:mt-4'>
-            Available Balance:{' '}
-            <span className='text-gray-900 pl-2'>${customerDetails.availableBalance}</span>
-          </p>
-          <p className='mt-3 text-xl text-gray-500 sm:mt-4'>
-            Invested Balance: <span className='text-gray-900 pl-2'>${investedBalance}</span>
-          </p>
-          <p className='mt-3 text-xl text-gray-500 sm:mt-4'>
-            Total Balance:{' '}
-            <span className='text-gray-900 pl-2'>
-              ${customerDetails.availableBalance + investedBalance}
-            </span>
-          </p>
-        </div>
-        <div className='mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12'>
-          {posts.map((post) => (
-            <div key={post.title}>
-              <div>
-                <span
-                  className={classNames(
-                    post.category.color,
-                    'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium'
-                  )}
-                >
-                  {post.category.name}
-                </span>
+    <div>
+      <form className='space-y-8 divide-y mt-12 max-w-lg mx-auto' onSubmit={handleSubmit}>
+        <div className='space-y-8 divide-y'>
+          <div className='pt-8'>
+            <div>
+              <h3 className='text-2xl leading-6 font-medium text-gray-900'>Invest your funds</h3>
+              <p className='mt-1 text-md text-gray-500'>
+                Use the form below to invest your "Available Balance" into a pool.
+              </p>
+            </div>
+            <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3'>
+              <div className='sm:col-span-3'>
+                <label htmlFor='cropPool' className='block text-md font-medium text-gray-700'>
+                  Pick Crop Pool
+                </label>
+                <div className='mt-1'>
+                  <select
+                    id='cropPool'
+                    name='cropPool'
+                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                  >
+                    <option value='pool1'>Crop Pool 1</option>
+                    <option value='pool2' disabled>
+                      Crop Pool 2 (Coming Soon!)
+                    </option>
+                    <option value='pool3' disabled>
+                      Crop Pool 3 (Coming Soon!)
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div className='mt-4'>
-                <p className='text-xl font-semibold text-gray-900'>{post.title}</p>
-                <p className='mt-3 text-base text-gray-500'>{post.description}</p>
+              <div className='sm:col-span-3'>
+                <label htmlFor='amount' className='block font-medium text-gray-700'>
+                  Deposit
+                </label>
+                <p className='text-sm text-gray-500'>
+                  This will use the money from your "Available Balance".
+                </p>
+                <div className='mt-1 flex rounded-md'>
+                  <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm'>
+                    $
+                  </span>
+                  <input
+                    type='number'
+                    name='amount'
+                    id='amount'
+                    className='flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full max-w-xs min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300'
+                  />
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+
+        <div className='pt-5'>
+          <div className='flex justify-end'>
+            <button
+              type='submit'
+              className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full'
+            >
+              Submit Request
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }

@@ -38,4 +38,14 @@ function getCustomer(userId) {
     });
 }
 
-export { createBalances, depositTicket, getCustomer };
+function createRequest(userId, cropPoolId, amount) {
+  const db = getDatabase();
+  const userRequestsListRef = ref(db, 'requests/' + userId);
+  const newUserRequestRef = push(userRequestsListRef);
+  return set(newUserRequestRef, {
+    cropPoolId: cropPoolId,
+    amount: amount,
+  });
+}
+
+export { createBalances, depositTicket, getCustomer, createRequest };

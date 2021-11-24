@@ -9,6 +9,7 @@ import { CompanyScreen } from 'screens/company';
 import { DepositScreen } from 'screens/deposit';
 import { InvestScreen } from 'screens/invest';
 import { DepositSuccessScreen } from 'screens/deposit-success';
+import { InvestSuccessScreen } from 'screens/invest-success';
 import { NotFoundScreen } from 'screens/not-found';
 import { NavigationComponent } from 'components/navigation';
 
@@ -61,6 +62,7 @@ function AppRoutes() {
       <Route path='/deposit' element={<DepositScreen />} />
       <Route path='/deposit-success' element={<DepositSuccessScreen />} />
       <Route path='/invest' element={<InvestScreen />} />
+      <Route path='/invest-success' element={<InvestSuccessScreen />} />
       <Route path='*' element={<NotFoundScreen />} />
     </Routes>
   );
