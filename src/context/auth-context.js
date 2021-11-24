@@ -43,7 +43,7 @@ function AuthProvider(props) {
   const login = React.useCallback(
     (form) =>
       auth.login(form).then((allDetails) => {
-        setData(allDetails.user.email);
+        setData(allDetails);
       }),
     [setData]
   );
@@ -52,20 +52,6 @@ function AuthProvider(props) {
   const register = React.useCallback(
     (form) => {
       return auth.register(form).then(() => {
-        const NewUser = {
-          email: form.email,
-          name: form.full_name,
-          registrationDate: new Date(),
-          finances: {
-            availableBalance: 0,
-            invested: {
-              pool1: 0,
-              pool2: 0,
-              pool3: 0,
-            },
-          },
-        };
-        client('create_user', { data: { ...NewUser } });
         login(form);
       });
     },
@@ -106,8 +92,8 @@ function useAuth() {
 }
 
 function useClient() {
-  const { user } = useAuth();
-  const token = user?.token;
+  const { user: userDetails } = useAuth();
+  const token = userDetails?.token;
   return React.useCallback((endpoint, config) => client(endpoint, { ...config, token }), [token]);
 }
 

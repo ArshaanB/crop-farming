@@ -8,7 +8,7 @@ import { depositTicket } from 'utils/financial-details';
 function DepositForm() {
   const navigate = useNavigate();
 
-  const { user: email } = useAuth();
+  const { user: userDetails } = useAuth();
   const { run } = useAsync();
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,12 +23,7 @@ function DepositForm() {
     }
 
     run(
-      depositTicket({
-        email: email,
-        amount: amount.value,
-        depositMethod: depositMethodValue,
-        referenceNumber: referenceNumber.value,
-      })
+      depositTicket(userDetails.user.uid, amount.value, depositMethodValue, referenceNumber.value)
     );
 
     navigate('/deposit-success');

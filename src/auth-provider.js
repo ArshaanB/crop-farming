@@ -7,6 +7,9 @@ import {
   signOut,
 } from 'firebase/auth';
 
+import { createUser } from 'utils/user-details';
+import { createBalances } from 'utils/financial-details';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,10 +23,11 @@ const firebaseConfig = {
   messagingSenderId: '985251351844',
   appId: '1:985251351844:web:1b1312eea630485a2eb7b1',
   measurementId: 'G-DCM19TQV2S',
+  databaseURL: 'https://cropfarming-c88dd-default-rtdb.firebaseio.com/',
 };
 
 // Initialize Firebase
-// const app = 
+// const app =
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
@@ -43,8 +47,11 @@ function login({ email, password }) {
   return signInWithEmailAndPassword(auth, email, password).then(handleUserResponse);
 }
 
-function register({ email, password }) {
-  return createUserWithEmailAndPassword(auth, email, password);
+function register({ full_name, email, password }) {
+  return createUserWithEmailAndPassword(auth, email, password).then((userCredentials) => {
+    createUser(userCredentials.user.uid, full_name, email);
+    createBalances(userCredentials.user.uid);
+  });
 }
 
 async function logout() {

@@ -4,6 +4,7 @@ import { useAuth } from '../context/auth-context';
 
 import { getCustomer } from 'utils/financial-details';
 
+// These could be useful for colour coating later on.
 // bg-pink-100
 // bg-green-100
 const posts = [
@@ -37,7 +38,7 @@ function calculateInvestedBalance(allPools) {
 }
 
 function InvestForm() {
-  const { user: email } = useAuth();
+  const { user: userDetails } = useAuth();
 
   const [customerDetails, setCustomerDetails] = React.useState({
     availableBalance: 0,
@@ -51,12 +52,10 @@ function InvestForm() {
   const investedBalance = calculateInvestedBalance(Object.values(customerDetails.invested));
 
   React.useEffect(() => {
-    getCustomer({
-      email: email,
-    }).then((response) => {
-      setCustomerDetails(response.data.finances);
+    getCustomer(userDetails.user.uid).then((customerBalances) => {
+      setCustomerDetails(customerBalances);
     });
-  }, [email]);
+  }, [userDetails]);
 
   return (
     <div className='bg-white pt-12 pb-20 px-4 sm:px-6 lg:pt-12 lg:pb-28 lg:px-8'>

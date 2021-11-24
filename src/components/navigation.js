@@ -11,7 +11,7 @@ const navigation = [
 ];
 
 function NavigationComponent() {
-  const { user, logout } = useAuth();
+  const { user: userDetails, logout } = useAuth();
   const locationPath = useLocation().pathname;
   const [menuType, setMenuType] = useState('primary');
 
@@ -50,7 +50,7 @@ function NavigationComponent() {
           </div>
           <div className='ml-10 space-x-2'>
             <p className='inline-block py-2 px-4 border border-transparent rounded-md text-base font-medium text-white'>
-              {user}
+              {userDetails.user.email}
             </p>
             <button
               className='inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50'
