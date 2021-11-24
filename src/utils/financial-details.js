@@ -20,6 +20,7 @@ function depositTicket(userId, amount, depositMethod, referenceNumber) {
     amount: amount,
     depositMethod: depositMethod,
     referenceNumber: referenceNumber,
+    processedDate: -1,
   });
 }
 
@@ -45,6 +46,7 @@ function createRequest(userId, cropPoolId, amount) {
   return set(newUserRequestRef, {
     cropPoolId: cropPoolId,
     amount: amount,
+    processedDate: -1,
   });
 }
 
